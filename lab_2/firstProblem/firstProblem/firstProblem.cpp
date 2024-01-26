@@ -28,9 +28,17 @@ class Aeroflot {
         int getRegistrationSection() const { return registrationSection; }
 };
 
-bool sortByDestination(const Aeroflot& a, const Aeroflot& b) {
-    return a.getDestinationPoint() < b.getDestinationPoint();
+void bubbleSort(vector<Aeroflot>& flights) {
+    int n = flights.size();
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (flights[j].getDestinationPoint() > flights[j + 1].getDestinationPoint()) {
+                swap(flights[j], flights[j + 1]);
+            }
+        }
+    }
 }
+
 
 int main() {
     SetConsoleOutputCP(1251);
@@ -66,7 +74,7 @@ int main() {
         flights.emplace_back(flightNumber, departurePoint, destinationPoint, arrivalTime, departureTime, registrationSection);
     }
 
-    sort(flights.begin(), flights.end(), sortByDestination);
+    bubbleSort(flights);
 
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
     cout << "| # Рейса | Пункт отправления | Пункт назначения | Время прибытия | Время отправления | Секция регистрации |" << endl;

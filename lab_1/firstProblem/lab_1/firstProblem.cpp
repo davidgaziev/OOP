@@ -15,9 +15,16 @@ double power(double n, int p = 2) {
 char power(char n, int p = 2) {
     char result = n;
 
+    double temp = n;
+    double temp2 = n;
+
     for (int i = 1; i < p; i++) {
+        cout << temp << endl;
+        temp *= temp2;
         result *= n;
     }
+
+    cout << temp << endl;
 
     return result;
 }

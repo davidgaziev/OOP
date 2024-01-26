@@ -36,7 +36,7 @@ public:
         if (!isEmpty()) {
             return topNode->data;
         }
-        // Возвращаем значение по умолчанию, если стек пуст
+       
         return '\0';
     }
 
@@ -45,9 +45,8 @@ public:
     }
 };
 
-// Функция для разделения состава на два направления
 void separateTrain(const Stack& train, Stack& directionA, Stack& directionB) {
-    Stack tempTrain = train; // Создаем копию состава
+    Stack tempTrain = train;
 
     while (!tempTrain.isEmpty()) {
         char wagon = tempTrain.top();
@@ -61,9 +60,8 @@ void separateTrain(const Stack& train, Stack& directionA, Stack& directionB) {
     }
 }
 
-// Функция для вывода содержимого стека
 void printStack(const Stack& stack) {
-    Stack tempStack = stack; // Создаем копию стека
+    Stack tempStack = stack;
 
     while (!tempStack.isEmpty()) {
         cout << tempStack.top() << " ";
@@ -109,10 +107,8 @@ int main() {
         file.close();
     }
 
-    // Разделяем состав на два направления
     separateTrain(train, directionA, directionB);
 
-    // Выводим составы на два направления
     cout << "Направление A:" << endl;
     printStack(directionA);
 

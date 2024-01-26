@@ -40,7 +40,7 @@ public:
         }
 
         return false;
-    }
+    }   
 
     Student* findStudentBySurname(const string& surname) {
         auto it = find_if(students.begin(), students.end(), [&](const Student& student) {

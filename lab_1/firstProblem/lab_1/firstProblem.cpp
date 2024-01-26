@@ -2,7 +2,7 @@
 using namespace std;
 
 
-static double power(double n, int p = 2) {
+double power(double n, int p = 2) {
     double result = n;
 
     for (int i = 1; i < p; i++) {
@@ -12,20 +12,8 @@ static double power(double n, int p = 2) {
     return result;
 }
 
-static double power(char n, int p = 2) {
-    double temp = n - '0';
-
-    double result = temp;
-
-    for (int i = 1; i < p; i++) {
-        result *= temp;
-    }
-
-    return result;
-}
-
-static double power(short int n, int p = 2) {
-    double result = n;
+char power(char n, int p = 2) {
+    char result = n;
 
     for (int i = 1; i < p; i++) {
         result *= n;
@@ -34,8 +22,8 @@ static double power(short int n, int p = 2) {
     return result;
 }
 
-static double power(long int n, int p = 2) {
-    double result = n;
+short int power(short int n, int p = 2) {
+    short int  result = n;
 
     for (int i = 1; i < p; i++) {
         result *= n;
@@ -44,8 +32,8 @@ static double power(long int n, int p = 2) {
     return result;
 }
 
-static double power(float n, int p = 2) {
-    double result = n;
+long int power(long int n, int p = 2) {
+    long int result = n;
 
     for (int i = 1; i < p; i++) {
         result *= n;
@@ -54,18 +42,38 @@ static double power(float n, int p = 2) {
     return result;
 }
 
+float power(float n, int p = 2) {
+    float result = n;
 
+    for (int i = 1; i < p; i++) {
+        result *= n;
+    }
+
+    return result;
+}
 
 int main()
 {
     setlocale(LC_ALL, "Russian");
 
-    float digit;
+    double inputDouble, result;
     int powerDigit, answer;
-    double result;
+   
+    char inputChar, resultChar;
+    short int inputShortInt, resultShortInt;
+    long int inputLongInt, resultLongInt;
+    float inputFloat, resultFloat;
 
-    cout << "Введите число: ";
-    cin >> digit;
+    cout << "Введите:\n" << "double: ";
+    cin >> inputDouble;
+    cout << "char: ";
+    cin >> inputChar;
+    cout << "short int: ";
+    cin >> inputShortInt;
+    cout << "long int: ";
+    cin >> inputLongInt;
+    cout << "float: ";
+    cin >> inputFloat;
     cout << "Хотите ли ввести степень? (>=1 - да, 0 - нет): ";
     cin >> answer;
     if (answer) {
@@ -75,11 +83,23 @@ int main()
             if (powerDigit > 2) break;
             else cout << "Степень должна быть больше 2!\n";
         }
-        result = power(digit, powerDigit);
+        result = power(inputDouble, powerDigit);
+        resultChar = power(inputChar, powerDigit);
+        resultShortInt = power(inputShortInt, powerDigit);
+        resultLongInt = power(inputLongInt, powerDigit);
+        resultFloat = power(inputFloat, powerDigit);
     }
     else {
-        result = power(digit);
+        result = power(inputDouble);
+        resultChar = power(inputChar);
+        resultShortInt = power(inputShortInt);;
+        resultLongInt = power(inputLongInt);
+        resultFloat = power(inputFloat);
     }
     
-    cout << "Результат: " << result;
+    cout << "Результат:\n" << "double: " << result << endl;
+    cout << "char: " << resultChar << endl;
+    cout << "short int: " << resultShortInt  << endl;
+    cout << "long int: " << resultLongInt << endl;
+    cout << "float: " << resultFloat << endl;
 }

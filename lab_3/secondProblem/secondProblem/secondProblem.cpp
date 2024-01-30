@@ -33,22 +33,18 @@ public:
         return quantity > 0;
     }
 
-    // Получить название товара
     const string& getItemName() const {
         return itemName;
     }
 
-    // Получить оптовую цену
     double getWholesalePrice() const {
         return wholesalePrice;
     }
 
-    // Получить розничную наценку
     double getRetailMarkup() const {
         return retailMarkup;
     }
 
-    // Получить количество товара
     int getQuantity() const {
         return quantity;
     }

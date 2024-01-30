@@ -39,13 +39,13 @@ int main() {
 
     Timer timer1(10);
     Timer timer2("5"); 
-    Timer timer3(1, 30);
+    Timer timer3(1, 5);
 
-    cout << "Таймер 1  int (10 сек):" << endl;
-    timer1.run();
+    //cout << "Таймер 1  int (10 сек):" << endl;
+    //timer1.run();
 
-    cout << "\nТаймер 2 string (5 сек):" << endl;
-    timer2.run();
+    //cout << "\nТаймер 2 string (5 сек):" << endl;
+    //timer2.run();
 
     cout << "\nТаймер 3 int int (1 мин 30 сек):" << endl;
     timer3.run();

@@ -1,31 +1,24 @@
 ﻿#include <iostream>
 #include <string>
+#include <vector>
+#include <iomanip>
 #include <windows.h>
 
 using namespace std;
 
 class Nomenclature {
 private:
-    string* itemName;
+    string itemName;
     double wholesalePrice;
     double retailMarkup;
     int quantity;
 
 public:
-    //Случай когда нет необходимости в декострукторе 
-    /*Nomenclature(const string& name = "", double wholesale = 0.0, double markup = 0.0, int qty = 0)
-        : itemName(name), wholesalePrice(wholesale), retailMarkup(markup), quantity(qty) {}*/
-
-    // Случай когда есть необходимость в декострукторе
     Nomenclature(const string& name = "", double wholesale = 0.0, double markup = 0.0, int qty = 0)
-        : itemName(new string(name)), wholesalePrice(wholesale), retailMarkup(markup), quantity(qty) {}
-
-    ~Nomenclature() {
-        delete itemName; 
-    }
+        : itemName(name), wholesalePrice(wholesale), retailMarkup(markup), quantity(qty) {}
 
     void setItem(const string& name, double wholesale, double markup, int qty) {
-        *itemName = name;
+        itemName = name;
         wholesalePrice = wholesale;
         retailMarkup = markup;
         quantity = qty;
@@ -36,23 +29,35 @@ public:
         return retailPrice * quantity - wholesalePrice * quantity;
     }
 
-    void display() const {
-        cout << "Название товара: " << *itemName << endl;
-        cout << "Оптовая цена: " << wholesalePrice << endl;
-        cout << "Розничная наценка: " << retailMarkup * 100 << "%" << endl;
-        cout << "Количество на складе: " << quantity << endl;
-        cout << "Возможный чистый доход: " << calculateProfit() << endl;
-    }
-
     bool hasItems() const {
         return quantity > 0;
+    }
+
+    // Получить название товара
+    const string& getItemName() const {
+        return itemName;
+    }
+
+    // Получить оптовую цену
+    double getWholesalePrice() const {
+        return wholesalePrice;
+    }
+
+    // Получить розничную наценку
+    double getRetailMarkup() const {
+        return retailMarkup;
+    }
+
+    // Получить количество товара
+    int getQuantity() const {
+        return quantity;
     }
 };
 
 void printMenu() {
     cout << "Меню:\n";
     cout << "1. Ввести новый товар\n";
-    cout << "2. Вывести информацию о товаре\n";
+    cout << "2. Вывести информацию о товарах\n";
     cout << "0. Выйти из программы\n";
 }
 
@@ -62,8 +67,7 @@ int main() {
 
     setlocale(LC_ALL, "ru");
 
-
-    Nomenclature item;
+    vector<Nomenclature> items;
     int choice;
 
     do {
@@ -87,15 +91,21 @@ int main() {
             cout << "Введите количество товара: ";
             cin >> qty;
 
-            item.setItem(name, wholesale, markup, qty);
+            items.emplace_back(name, wholesale, markup, qty);
             break;
         }
         case 2: {
-            if (item.hasItems()) {
-                item.display();
+            if (!items.empty()) {
+                cout << setw(20) << left << "Название товара" << setw(15) << "Оптовая цена" << setw(25) << "Розничная наценка (%)" << setw(15) << "Количество" << setw(20) << "Чистый доход" << endl;
+                cout << "---------------------------------------------------------------------------------------------------\n";
+
+                for (const auto& item : items) {
+                    cout << setw(20) << left << item.getItemName() << setw(15) << item.getWholesalePrice() << setw(25) << item.getRetailMarkup() * 100 << setw(15) << item.getQuantity() << setw(20) << item.calculateProfit() << endl;
+                }
+                cout << "---------------------------------------------------------------------------------------------------\n";
             }
             else {
-                cout << "Нет данных о товаре. Сначала введите товар.\n";
+                cout << "Нет данных о товарах. Сначала введите товар.\n";
             }
             break;
         }

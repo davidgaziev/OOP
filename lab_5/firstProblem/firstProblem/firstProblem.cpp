@@ -12,23 +12,23 @@ public:
 
     Int operator+(const Int& other) const {
         long double result = value + other.value;
-        if (result > LLONG_MAX || result < LLONG_MIN) {
-            throw overflow_error("Выход за границы целого числа!");
+        if (result > INT_MAX || result < INT_MIN) {
+            throw overflow_error("Выполнение оператора сложения\nВыход за границы целого числа!");
         }
         return Int(result);
     }
 
     Int operator-(const Int& other) const {
         long double result = value - other.value;
-        if (result > LLONG_MAX || result < LLONG_MIN) {
-            throw overflow_error("Выход за границы целого числа!");
+        if (result > INT_MAX || result < INT_MIN) {
+            throw overflow_error("Выполнение оператора вычитания\nВыход за границы целого числа!");
         }
         return Int(result);
     }
 
     Int operator*(const Int& other) const {
         long double result = value * other.value;
-        if (result > LLONG_MAX || result < LLONG_MIN) {
+        if (result > INT_MAX || result < INT_MIN) {
             throw overflow_error("Выполнение оператора умножения\nВыход за границы целого числа!");
         }
         return Int(result);
@@ -39,14 +39,14 @@ public:
             throw runtime_error("Деления на ноль!");
         }
         long double result = value / other.value;
-        if (result > LLONG_MAX || result < LLONG_MIN) {
+        if (result > INT_MAX || result < INT_MIN) {
             throw overflow_error("Выполнение оператора деления\nВыход за границы целого числа!");
         }
         return Int(result);
     }
 
     Int& operator++() {
-        if (value == LLONG_MAX) {
+        if (value >= INT_MAX) {
             throw overflow_error("Выполнение унарного оператора сложения\nВыход за границы целого числа!");
         }
         ++value;
@@ -60,7 +60,7 @@ public:
     }
 
     Int& operator--() {
-        if (value == LLONG_MIN) {
+        if (value <= INT_MIN) {
             throw overflow_error("Выполнение унарного оператора вычитания\nВыход за границы целого числа!");
         }
         --value;
@@ -83,7 +83,7 @@ int main() {
     setlocale(LC_ALL, "ru");
 
     try {
-        Int a = LLONG_MAX; 
+        Int a = INT_MAX - 1000; 
         Int b = 1;
 
         Int sum = a + b;
@@ -98,13 +98,13 @@ int main() {
         Int div = a / b;
         cout << "Деление: " << div << endl;
 
-        Int c = LLONG_MAX - 1000;
+        Int c = INT_MAX - 1000;
 
         cout << "c до постфиксного инкремента: " << c++ << endl;
         cout << "c после постфиксного инкремента: " << c << endl;
         cout << "c до префиксного инкремента: " << ++c << endl;
 
-        Int d = LLONG_MIN + 1000;
+        Int d = INT_MIN + 1000;
         cout << "d до постфиксного декремента: " << d-- << endl;
         cout << "d после постфиксного декремента: " << d << endl;
         cout << "d до префиксного декремента: " << --d << endl;

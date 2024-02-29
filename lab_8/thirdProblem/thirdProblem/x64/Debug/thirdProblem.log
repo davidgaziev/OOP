@@ -1,0 +1,4 @@
+﻿  thirdProblem.cpp
+D:\labs\3 year\2 semester\ООП\labs\lab_8\thirdProblem\thirdProblem\thirdProblem.cpp(72,20): warning C4101: averageSalary: неиспользованная локальная переменная
+D:\labs\3 year\2 semester\ООП\labs\lab_8\thirdProblem\thirdProblem\thirdProblem.cpp(71,17): warning C4101: age: неиспользованная локальная переменная
+  thirdProblem.vcxproj -> D:\labs\3 year\2 semester\ООП\labs\lab_8\thirdProblem\x64\Debug\thirdProblem.exe

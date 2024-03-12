@@ -5,21 +5,22 @@ using namespace std;
 
 class Canon {
 public:
-	static int p;
+	static double p;
 
 	static void getShootResult(int n) {
-		cout << p << endl;
+		double prob = 0;
 		for (int i = 0; i < n; i++) {
-			if (p == 0) {
-				cout << "\nПромах! Цель не сбита";
+			prob = getEstimateProbability(i);
+			cout << "\nВероятность равна = " << prob << endl;
+			if (prob < 1) {
+				cout << "Промах! Цель не сбита\n";
 			}
-			else if (p == 1) {
-				cout << "\nЕсть попадание! Цель уничтожена";
+			else if (prob == 1) {
+				cout << "Есть попадание! Цель уничтожена\n";
 				break;
 			}
 		}
 		cout << endl;
-		
 	}
 
 	static double getEstimateProbability(int n) {
@@ -28,12 +29,14 @@ public:
 
 };
 
-int Canon::p = 0;
+double Canon::p = 0;
 
 int main() {
 	setlocale(LC_ALL, "ru");
 
-	int p;
+	cout.precision(15);
+
+	double p;
 	int n;
 	cout << "Введите вероятность попадания (0 <= p <= 1): ";
 	cin >> p;
@@ -42,11 +45,8 @@ int main() {
 
 	Canon::p = p;
 
-	cout << "Результат стрельбы: ";
+	cout << "Результат стрельбы:\n";
 	Canon::getShootResult(n);
 
-	double estimatedProbability = Canon::getEstimateProbability(n);
-
-	cout << "Оценочное значение вероятности поражения цели: " << estimatedProbability << endl;
 	return 0;
 }
